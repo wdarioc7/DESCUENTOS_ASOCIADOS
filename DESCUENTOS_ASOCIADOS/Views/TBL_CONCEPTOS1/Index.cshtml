@@ -1,0 +1,153 @@
+﻿@model IEnumerable<DESCUENTOS_ASOCIADOS.Models.TBL_CONCEPTOS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div style="width: 800px; height: 200px; overflow-y: scroll;">
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.CODIGO_CONCEPTO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCRIPCION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABREVIATURA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NATURALEZA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIPO_CUOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.APLICACION_CUOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CONCEPTO_TOPE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PERIODICIDAD_CUOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PORCENTAJE_CUOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AGRUP_CONCEPTOS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROP_TIEMPO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AGRUP_CALC_TIEMPO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAL_EXCLUD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VALOR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FECHA_INICIO_DESC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FECHA_FIN_DESC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESTADO_DESC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FORMA_PAGO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESTADO_CONCEPTO)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_CONCEPTO }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID_CONCEPTO }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_CONCEPTO })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGO_CONCEPTO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ABREVIATURA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NATURALEZA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIPO_CUOTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.APLICACION_CUOTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CONCEPTO_TOPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PERIODICIDAD_CUOTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PORCENTAJE_CUOTA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AGRUP_CONCEPTOS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROP_TIEMPO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AGRUP_CALC_TIEMPO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VAL_EXCLUD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VALOR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA_INICIO_DESC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA_FIN_DESC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTADO_DESC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FORMA_PAGO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTADO_CONCEPTO)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

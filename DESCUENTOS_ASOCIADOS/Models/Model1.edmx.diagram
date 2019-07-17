@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb358ea3cf014fbca0542f367826dbb8" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="DESCUENTOS_ASOCIADOSModel.TBL_ASOCIADO" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS" Width="1.875" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DESCUENTOS_ASOCIADOSModel.TBL_EQUIVALENCIAS" Width="1.5" PointX="3" PointY="1.5" />
+        <AssociationConnector Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_ASOCIADO_TBL_CONCEPTOS" />
+        <AssociationConnector Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS" />
+        <EntityTypeShape EntityType="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTO_ASOCIADO" Width="1.5" PointX="5.25" PointY="2.25" />
+        <AssociationConnector Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO" />
+        <AssociationConnector Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

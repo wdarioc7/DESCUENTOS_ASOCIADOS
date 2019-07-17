@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DESCUENTOS_ASOCIADOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_ASOCIADO">
+          <Key>
+            <PropertyRef Name="ID_ASOCIADO" />
+          </Key>
+          <Property Name="ID_ASOCIADO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="IDENTIFICACION" Type="nchar" MaxLength="10" />
+          <Property Name="TELOFONO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ESTADO_ASOCIADO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_CONCEPTO" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TBL_CONCEPTO_ASOCIADO">
+          <Key>
+            <PropertyRef Name="ID_CONASC" />
+          </Key>
+          <Property Name="ID_CONASC" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CONCEPTO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_ASOCIADO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FECHA_INICIAL" Type="date" />
+          <Property Name="FECHA_FINAL" Type="date" />
+          <Property Name="ESTADO_CUENTA" Type="bit" />
+          <Property Name="VALOR" Type="money" />
+          <Property Name="PERIODICIDAD" Type="nvarchar(max)" />
+          <Property Name="FORMA_PAGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHA_VENC" Type="date" />
+        </EntityType>
+        <EntityType Name="TBL_CONCEPTOS">
+          <Key>
+            <PropertyRef Name="ID_CONCEPTO" />
+          </Key>
+          <Property Name="ID_CONCEPTO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODIGO_CONCEPTO" Type="nvarchar(max)" />
+          <Property Name="DESCRIPCION" Type="text" />
+          <Property Name="ABREVIATURA" Type="nvarchar" MaxLength="50" />
+          <Property Name="NATURALEZA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MODO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TIPO_CUOTA" Type="nvarchar" MaxLength="50" />
+          <Property Name="APLICACION_CUOTA" Type="nvarchar" MaxLength="50" />
+          <Property Name="CONCEPTO_TOPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="PERIODICIDAD_CUOTA" Type="nvarchar" MaxLength="50" />
+          <Property Name="PORCENTAJE_CUOTA" Type="float" />
+          <Property Name="AGRUP_CONCEPTOS" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROP_TIEMPO" Type="binary" MaxLength="50" />
+          <Property Name="AGRUP_CALC_TIEMPO" Type="varchar(max)" />
+          <Property Name="VAL_EXCLUD" Type="money" />
+          <Property Name="VALOR" Type="money" />
+          <Property Name="FECHA_INICIO_DESC" Type="date" />
+          <Property Name="FECHA_FIN_DESC" Type="date" />
+          <Property Name="ESTADO_DESC" Type="binary" MaxLength="50" />
+          <Property Name="FORMA_PAGO" Type="money" />
+          <Property Name="ESTADO_CONCEPTO" Type="binary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_EQUIVALENCIAS">
+          <Key>
+            <PropertyRef Name="ID_EQUIVALENCIAS" />
+          </Key>
+          <Property Name="ID_EQUIVALENCIAS" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODIGO_CONTABLE" Type="varchar" MaxLength="50" />
+          <Property Name="ID_CONCEPTO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TBL_ASOCIADO_TBL_CONCEPTOS">
+          <End Role="TBL_CONCEPTOS" Type="Self.TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Role="TBL_ASOCIADO" Type="Self.TBL_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_ASOCIADO">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO">
+          <End Role="TBL_ASOCIADO" Type="Self.TBL_ASOCIADO" Multiplicity="0..1" />
+          <End Role="TBL_CONCEPTO_ASOCIADO" Type="Self.TBL_CONCEPTO_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ASOCIADO">
+              <PropertyRef Name="ID_ASOCIADO" />
+            </Principal>
+            <Dependent Role="TBL_CONCEPTO_ASOCIADO">
+              <PropertyRef Name="ID_ASOCIADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS">
+          <End Role="TBL_CONCEPTOS" Type="Self.TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Role="TBL_CONCEPTO_ASOCIADO" Type="Self.TBL_CONCEPTO_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_CONCEPTO_ASOCIADO">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS">
+          <End Role="TBL_CONCEPTOS" Type="Self.TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Role="TBL_EQUIVALENCIAS" Type="Self.TBL_EQUIVALENCIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_EQUIVALENCIAS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DESCUENTOS_ASOCIADOSModelStoreContainer">
+          <EntitySet Name="TBL_ASOCIADO" EntityType="Self.TBL_ASOCIADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CONCEPTO_ASOCIADO" EntityType="Self.TBL_CONCEPTO_ASOCIADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CONCEPTOS" EntityType="Self.TBL_CONCEPTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_EQUIVALENCIAS" EntityType="Self.TBL_EQUIVALENCIAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_ASOCIADO_TBL_CONCEPTOS" Association="Self.FK_TBL_ASOCIADO_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_ASOCIADO" EntitySet="TBL_ASOCIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO" Association="Self.FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO">
+            <End Role="TBL_ASOCIADO" EntitySet="TBL_ASOCIADO" />
+            <End Role="TBL_CONCEPTO_ASOCIADO" EntitySet="TBL_CONCEPTO_ASOCIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS" Association="Self.FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_CONCEPTO_ASOCIADO" EntitySet="TBL_CONCEPTO_ASOCIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS" Association="Self.FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_EQUIVALENCIAS" EntitySet="TBL_EQUIVALENCIAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DESCUENTOS_ASOCIADOSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DESCUENTOS_ASOCIADOSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_ASOCIADO" EntityType="DESCUENTOS_ASOCIADOSModel.TBL_ASOCIADO" />
+          <EntitySet Name="TBL_CONCEPTOS" EntityType="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS" />
+          <EntitySet Name="TBL_EQUIVALENCIAS" EntityType="DESCUENTOS_ASOCIADOSModel.TBL_EQUIVALENCIAS" />
+          <AssociationSet Name="FK_TBL_ASOCIADO_TBL_CONCEPTOS" Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_ASOCIADO_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_ASOCIADO" EntitySet="TBL_ASOCIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS" Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_EQUIVALENCIAS" EntitySet="TBL_EQUIVALENCIAS" />
+          </AssociationSet>
+          <EntitySet Name="TBL_CONCEPTO_ASOCIADO" EntityType="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTO_ASOCIADO" />
+          <AssociationSet Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO" Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO">
+            <End Role="TBL_ASOCIADO" EntitySet="TBL_ASOCIADO" />
+            <End Role="TBL_CONCEPTO_ASOCIADO" EntitySet="TBL_CONCEPTO_ASOCIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS" Association="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS">
+            <End Role="TBL_CONCEPTOS" EntitySet="TBL_CONCEPTOS" />
+            <End Role="TBL_CONCEPTO_ASOCIADO" EntitySet="TBL_CONCEPTO_ASOCIADO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TBL_ASOCIADO">
+          <Key>
+            <PropertyRef Name="ID_ASOCIADO" />
+          </Key>
+          <Property Name="ID_ASOCIADO" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELOFONO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_CONCEPTO" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TBL_CONCEPTOS" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_ASOCIADO_TBL_CONCEPTOS" FromRole="TBL_ASOCIADO" ToRole="TBL_CONCEPTOS" />
+          <Property Name="IDENTIFICACION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TBL_CONCEPTO_ASOCIADO" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO" FromRole="TBL_ASOCIADO" ToRole="TBL_CONCEPTO_ASOCIADO" />
+          <Property Name="ESTADO_ASOCIADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_CONCEPTOS">
+          <Key>
+            <PropertyRef Name="ID_CONCEPTO" />
+          </Key>
+          <Property Name="ID_CONCEPTO" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO_CONCEPTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NATURALEZA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MODO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TIPO_CUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APLICACION_CUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONCEPTO_TOPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PERIODICIDAD_CUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PORCENTAJE_CUOTA" Type="Double" />
+          <Property Name="AGRUP_CONCEPTOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROP_TIEMPO" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="AGRUP_CALC_TIEMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VAL_EXCLUD" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VALOR" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FECHA_INICIO_DESC" Type="DateTime" Precision="0" />
+          <Property Name="FECHA_FIN_DESC" Type="DateTime" Precision="0" />
+          <Property Name="ESTADO_DESC" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="FORMA_PAGO" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ESTADO_CONCEPTO" Type="Binary" MaxLength="50" FixedLength="true" />
+          <NavigationProperty Name="TBL_ASOCIADO" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_ASOCIADO_TBL_CONCEPTOS" FromRole="TBL_CONCEPTOS" ToRole="TBL_ASOCIADO" />
+          <NavigationProperty Name="TBL_EQUIVALENCIAS" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS" FromRole="TBL_CONCEPTOS" ToRole="TBL_EQUIVALENCIAS" />
+          <NavigationProperty Name="TBL_CONCEPTO_ASOCIADO" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS" FromRole="TBL_CONCEPTOS" ToRole="TBL_CONCEPTO_ASOCIADO" />
+        </EntityType>
+        <EntityType Name="TBL_EQUIVALENCIAS">
+          <Key>
+            <PropertyRef Name="ID_EQUIVALENCIAS" />
+          </Key>
+          <Property Name="ID_EQUIVALENCIAS" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO_CONTABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CONCEPTO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TOTAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_CONCEPTOS" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS" FromRole="TBL_EQUIVALENCIAS" ToRole="TBL_CONCEPTOS" />
+        </EntityType>
+        <Association Name="FK_TBL_ASOCIADO_TBL_CONCEPTOS">
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS" Role="TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_ASOCIADO" Role="TBL_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_ASOCIADO">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_EQUIVALENCIAS_TBL_CONCEPTOS">
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS" Role="TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_EQUIVALENCIAS" Role="TBL_EQUIVALENCIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_EQUIVALENCIAS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TBL_CONCEPTO_ASOCIADO">
+          <Key>
+            <PropertyRef Name="ID_CONASC" />
+          </Key>
+          <Property Name="ID_CONASC" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CONCEPTO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_ASOCIADO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FECHA_INICIAL" Type="DateTime" Precision="0" />
+          <Property Name="FECHA_FINAL" Type="DateTime" Precision="0" />
+          <Property Name="ESTADO_CUENTA" Type="Boolean" />
+          <Property Name="VALOR" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PERIODICIDAD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FORMA_PAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_VENC" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TBL_ASOCIADO" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO" FromRole="TBL_CONCEPTO_ASOCIADO" ToRole="TBL_ASOCIADO" />
+          <NavigationProperty Name="TBL_CONCEPTOS" Relationship="DESCUENTOS_ASOCIADOSModel.FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS" FromRole="TBL_CONCEPTO_ASOCIADO" ToRole="TBL_CONCEPTOS" />
+        </EntityType>
+        <Association Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_ASOCIADO">
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_ASOCIADO" Role="TBL_ASOCIADO" Multiplicity="0..1" />
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTO_ASOCIADO" Role="TBL_CONCEPTO_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ASOCIADO">
+              <PropertyRef Name="ID_ASOCIADO" />
+            </Principal>
+            <Dependent Role="TBL_CONCEPTO_ASOCIADO">
+              <PropertyRef Name="ID_ASOCIADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_CONCEPTO_ASOCIADO_TBL_CONCEPTOS">
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS" Role="TBL_CONCEPTOS" Multiplicity="0..1" />
+          <End Type="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTO_ASOCIADO" Role="TBL_CONCEPTO_ASOCIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CONCEPTOS">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Principal>
+            <Dependent Role="TBL_CONCEPTO_ASOCIADO">
+              <PropertyRef Name="ID_CONCEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DESCUENTOS_ASOCIADOSModelStoreContainer" CdmEntityContainer="DESCUENTOS_ASOCIADOSEntities">
+          <EntitySetMapping Name="TBL_ASOCIADO">
+            <EntityTypeMapping TypeName="DESCUENTOS_ASOCIADOSModel.TBL_ASOCIADO">
+              <MappingFragment StoreEntitySet="TBL_ASOCIADO">
+                <ScalarProperty Name="ESTADO_ASOCIADO" ColumnName="ESTADO_ASOCIADO" />
+                <ScalarProperty Name="IDENTIFICACION" ColumnName="IDENTIFICACION" />
+                <ScalarProperty Name="ID_CONCEPTO" ColumnName="ID_CONCEPTO" />
+                <ScalarProperty Name="TELOFONO" ColumnName="TELOFONO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_ASOCIADO" ColumnName="ID_ASOCIADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CONCEPTOS">
+            <EntityTypeMapping TypeName="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTOS">
+              <MappingFragment StoreEntitySet="TBL_CONCEPTOS">
+                <ScalarProperty Name="ESTADO_CONCEPTO" ColumnName="ESTADO_CONCEPTO" />
+                <ScalarProperty Name="FORMA_PAGO" ColumnName="FORMA_PAGO" />
+                <ScalarProperty Name="ESTADO_DESC" ColumnName="ESTADO_DESC" />
+                <ScalarProperty Name="FECHA_FIN_DESC" ColumnName="FECHA_FIN_DESC" />
+                <ScalarProperty Name="FECHA_INICIO_DESC" ColumnName="FECHA_INICIO_DESC" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="VAL_EXCLUD" ColumnName="VAL_EXCLUD" />
+                <ScalarProperty Name="AGRUP_CALC_TIEMPO" ColumnName="AGRUP_CALC_TIEMPO" />
+                <ScalarProperty Name="PROP_TIEMPO" ColumnName="PROP_TIEMPO" />
+                <ScalarProperty Name="AGRUP_CONCEPTOS" ColumnName="AGRUP_CONCEPTOS" />
+                <ScalarProperty Name="PORCENTAJE_CUOTA" ColumnName="PORCENTAJE_CUOTA" />
+                <ScalarProperty Name="PERIODICIDAD_CUOTA" ColumnName="PERIODICIDAD_CUOTA" />
+                <ScalarProperty Name="CONCEPTO_TOPE" ColumnName="CONCEPTO_TOPE" />
+                <ScalarProperty Name="APLICACION_CUOTA" ColumnName="APLICACION_CUOTA" />
+                <ScalarProperty Name="TIPO_CUOTA" ColumnName="TIPO_CUOTA" />
+                <ScalarProperty Name="MODO" ColumnName="MODO" />
+                <ScalarProperty Name="NATURALEZA" ColumnName="NATURALEZA" />
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CODIGO_CONCEPTO" ColumnName="CODIGO_CONCEPTO" />
+                <ScalarProperty Name="ID_CONCEPTO" ColumnName="ID_CONCEPTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_EQUIVALENCIAS">
+            <EntityTypeMapping TypeName="DESCUENTOS_ASOCIADOSModel.TBL_EQUIVALENCIAS">
+              <MappingFragment StoreEntitySet="TBL_EQUIVALENCIAS">
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="ID_CONCEPTO" ColumnName="ID_CONCEPTO" />
+                <ScalarProperty Name="CODIGO_CONTABLE" ColumnName="CODIGO_CONTABLE" />
+                <ScalarProperty Name="ID_EQUIVALENCIAS" ColumnName="ID_EQUIVALENCIAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CONCEPTO_ASOCIADO">
+            <EntityTypeMapping TypeName="DESCUENTOS_ASOCIADOSModel.TBL_CONCEPTO_ASOCIADO">
+              <MappingFragment StoreEntitySet="TBL_CONCEPTO_ASOCIADO">
+                <ScalarProperty Name="FECHA_VENC" ColumnName="FECHA_VENC" />
+                <ScalarProperty Name="FORMA_PAGO" ColumnName="FORMA_PAGO" />
+                <ScalarProperty Name="PERIODICIDAD" ColumnName="PERIODICIDAD" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="ESTADO_CUENTA" ColumnName="ESTADO_CUENTA" />
+                <ScalarProperty Name="FECHA_FINAL" ColumnName="FECHA_FINAL" />
+                <ScalarProperty Name="FECHA_INICIAL" ColumnName="FECHA_INICIAL" />
+                <ScalarProperty Name="ID_ASOCIADO" ColumnName="ID_ASOCIADO" />
+                <ScalarProperty Name="ID_CONCEPTO" ColumnName="ID_CONCEPTO" />
+                <ScalarProperty Name="ID_CONASC" ColumnName="ID_CONASC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,91 @@
+﻿@model DESCUENTOS_ASOCIADOS.Models.TBL_CONCEPTO_ASOCIADO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TBL_CONCEPTO_ASOCIADO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_INICIAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_INICIAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_FINAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_FINAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO_CUENTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_CUENTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALOR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALOR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PERIODICIDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PERIODICIDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FORMA_PAGO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FORMA_PAGO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_VENC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_VENC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBL_ASOCIADO.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBL_ASOCIADO.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBL_CONCEPTOS.CODIGO_CONCEPTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBL_CONCEPTOS.CODIGO_CONCEPTO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_CONASC }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

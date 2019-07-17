@@ -1,0 +1,185 @@
+﻿@model DESCUENTOS_ASOCIADOS.Models.TBL_CONCEPTOS
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TBL_CONCEPTOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CODIGO_CONCEPTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_CONCEPTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ABREVIATURA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ABREVIATURA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NATURALEZA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NATURALEZA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPO_CUOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO_CUOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APLICACION_CUOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APLICACION_CUOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONCEPTO_TOPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONCEPTO_TOPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PERIODICIDAD_CUOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PERIODICIDAD_CUOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PORCENTAJE_CUOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PORCENTAJE_CUOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGRUP_CONCEPTOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGRUP_CONCEPTOS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROP_TIEMPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROP_TIEMPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGRUP_CALC_TIEMPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGRUP_CALC_TIEMPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAL_EXCLUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAL_EXCLUD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALOR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALOR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_INICIO_DESC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_INICIO_DESC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_FIN_DESC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_FIN_DESC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO_DESC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_DESC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FORMA_PAGO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FORMA_PAGO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO_CONCEPTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_CONCEPTO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,43 @@
+﻿@model DESCUENTOS_ASOCIADOS.Models.TBL_ASOCIADO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TBL_ASOCIADO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELOFONO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELOFONO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBL_CONCEPTOS.CODIGO_CONCEPTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBL_CONCEPTOS.CODIGO_CONCEPTO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_ASOCIADO }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
