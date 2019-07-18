@@ -11,7 +11,39 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                Periodicidad: @Html.TextBox("SearchString1")
 
+            </td>
+            <td>
+                Forma de Pago: @Html.TextBox("SearchString2")
+
+            </td>
+            <td>
+                Estado de cuenta: @Html.TextBox("SearchString3")
+
+            </td>
+            <td>
+                Concepto: @Html.TextBox("SearchString4")
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Search" />
+            </td>
+        </tr>
+
+    </table>
+
+}
+<p>
+    @Html.ActionLink("EXPORTAR A EXCEL", "GenerarExcel")
+</p>
 
 <table class="table">
     <tr>
@@ -45,41 +77,42 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA_INICIAL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA_FINAL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ESTADO_CUENTA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VALOR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PERIODICIDAD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FORMA_PAGO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA_VENC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TBL_ASOCIADO.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TBL_CONCEPTOS.CODIGO_CONCEPTO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_CONASC }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_CONASC }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_CONASC })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_INICIAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_FINAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ESTADO_CUENTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VALOR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PERIODICIDAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FORMA_PAGO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_VENC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBL_ASOCIADO.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBL_CONCEPTOS.CODIGO_CONCEPTO)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_CONASC }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_CONASC }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_CONASC })
+            </td>
+        </tr>
+    }
 
 </table>

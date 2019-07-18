@@ -812,6 +812,7 @@
     <Content Include="Views\TBL_CONCEPTO_ASOCIADO\Details.cshtml" />
     <Content Include="Views\TBL_CONCEPTO_ASOCIADO\Edit.cshtml" />
     <Content Include="Views\TBL_CONCEPTO_ASOCIADO\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

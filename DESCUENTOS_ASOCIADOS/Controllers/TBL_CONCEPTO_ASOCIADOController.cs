@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DESCUENTOS_ASOCIADOS.Models;
+using System.Text;
 
 namespace DESCUENTOS_ASOCIADOS.Controllers
 {
@@ -16,7 +17,7 @@ namespace DESCUENTOS_ASOCIADOS.Controllers
         private DESCUENTOS_ASOCIADOSEntities db = new DESCUENTOS_ASOCIADOSEntities();
 
         // GET: TBL_CONCEPTO_ASOCIADO
-        public async Task<ActionResult> Index()
+        public async Task<ViewResult> Index(string sortOrder, string searchString1, string searchString2, string searchString3, string searchString4)
         {    //HACER UNA TABLA QUE CARGUE TODOS LOS ASOCIADOS Y LUEGO SELECCIONAR EL ASOCIADO Y COLOCARLE EL CONCEPTO LUEGO
              //LUEGO DEPENDIENDO DEL CONCEPTO SE LE APLICA LA PERIODICIDAD FECHA INICIAL DE LA CUENTA Y FECHA FINAL
              //1. el registro del concepto va hasta concepto tope
@@ -31,11 +32,109 @@ namespace DESCUENTOS_ASOCIADOS.Controllers
              //7.SE AFILIA NUEVA APORTE DE 90000 SE ACTIVA EL MES ACTUAL
              //8.LIQUIDACION DE DESCUENTOS SE DEBE PODER MODIFICAR LA FORMA DE PAGO
              //9.DETALLE CONCEPTO
-          
-           var tBL_CONCEPTO_ASOCIADO = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
-            return View(await tBL_CONCEPTO_ASOCIADO.ToListAsync());
-        }
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "ProductName desc" : "";
+            ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "UnitPrice desc" : "UnitPrice";
 
+            ViewBag.SearchString = searchString1;
+            var products = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
+            if (searchString1 == null)
+            {
+                 products = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
+                return View(await products.ToListAsync());
+            }
+
+           
+            products = from a in products
+                                   where (a.PERIODICIDAD.ToUpper().Contains(searchString1.ToUpper())
+                                   || a.FORMA_PAGO.ToUpper().Contains(searchString2.ToUpper())
+                                   || a.ESTADO_CUENTA.ToString() == searchString3
+                                   || a.ID_CONCEPTO.ToString() == searchString4)
+                                   select a;
+          
+           
+
+            switch (sortOrder)
+            {
+                case "ProductName desc":
+                    products = products.OrderByDescending(s => s.PERIODICIDAD);
+                    break;
+                case "UnitPrice":
+                    products = products.OrderBy(s => s.PERIODICIDAD);
+                    break;
+                case "UnitPrice desc":
+                    products = products.OrderByDescending(s => s.VALOR);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.ID_ASOCIADO);
+                    break;
+            }
+         
+            return View(await products.ToListAsync());
+        }
+        public ActionResult GenerarExcel()
+        {
+            var CONCEPTOS = (from p in db.TBL_CONCEPTO_ASOCIADO
+                               
+                                 select p).ToList();
+
+
+
+            StringBuilder builder = new System.Text.StringBuilder();
+
+            //Agregamos las cabezeras 
+            builder.Append("CONCEPTOS").Append(";")
+            .Append("ASOCIADOS").Append(";")
+            .Append("Eje");
+            builder.Append("\n");
+
+            foreach (var item in CONCEPTOS)
+            {
+
+                //var namelider = item.lider;
+                //var codigo_col = item.codigo;
+                //var lider = (from p in email_lider.Where(n => n.nombres == namelider)
+                //             select p.email).ToList();
+
+
+
+                //if (lider.Count == 0)
+                //{
+                //    nombreLider = "No existe";
+                //}
+                //else
+                //{
+                //    nombreLider = lider[0];
+                //}
+
+                builder.Append(item.PERIODICIDAD).Append(";");
+                builder.Append(item.ESTADO_CUENTA).Append(";");
+                //.Append(item.lider).Append(";")
+                //.Append(item.eje_funcional).Append(";");
+
+                //foreach (var peso in pesos.Where(n => n.Lider == nombreLider))
+                //{
+                //    builder.Append(peso.Peso_Objetivo).Append(";");
+                //}
+
+                //foreach (var calificacion in calificaciones.Where(n => n.codigo_colaborador == codigo_col))
+                //{
+                //    builder.Append(calificacion.calificacion).Append(";");
+                //}
+
+                builder.Append("\n");// agregamos una nueva fila 
+            }
+
+
+            // Lo encodeamos con UTF8 para mostrar los acentos correctamente.
+            var excelBytes = Encoding.UTF8.GetBytes(builder.ToString());
+            var excelConUT8Encoding = Encoding.UTF8.GetPreamble().Concat(excelBytes).ToArray();
+
+            // guardamos el contenido del archivo en la ruta especificada
+            var rutaExcel = Server.MapPath("~/App_Data/excel.csv");
+            System.IO.File.WriteAllBytes(rutaExcel, excelConUT8Encoding);
+
+            return File(rutaExcel, "text/csv", "Calificaciones.csv");
+        }
         // GET: TBL_CONCEPTO_ASOCIADO/Details/5
         public async Task<ActionResult> Details(decimal id)
         {
@@ -55,6 +154,28 @@ namespace DESCUENTOS_ASOCIADOS.Controllers
         public ActionResult Create()
         {
             ViewBag.ASOCIADOS = db.TBL_ASOCIADO.ToList();
+            List<SelectListItem> Periodicidad = new List<SelectListItem>();
+            Periodicidad.Add(new SelectListItem
+            {
+                Text = "Mensual",
+                Value = "Mensual"
+            });
+            Periodicidad.Add(new SelectListItem
+            {
+                Text = "Trimestral",
+                Value = "Trimestral"
+            });
+            Periodicidad.Add(new SelectListItem
+            {
+                Text = "Semestral",
+                Value = "Semestral"
+            });
+            Periodicidad.Add(new SelectListItem
+            {
+                Text = "Anual",
+                Value = "Anual"
+            });
+            @ViewBag.Periodicidad = Periodicidad;
             ViewBag.ID_ASOCIADO = new SelectList(db.TBL_ASOCIADO, "ID_ASOCIADO", "NOMBRE");
             ViewBag.ID_CONCEPTO = new SelectList(db.TBL_CONCEPTOS, "ID_CONCEPTO", "CODIGO_CONCEPTO");
             return View();
