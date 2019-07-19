@@ -36,8 +36,20 @@ namespace DESCUENTOS_ASOCIADOS.Controllers
             ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "UnitPrice desc" : "UnitPrice";
 
             ViewBag.SearchString = searchString1;
+            ViewBag.SearchString = searchString2;
+            ViewBag.SearchString = searchString3;
+            ViewBag.SearchString = searchString4;
+
+
             var products = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
-            if (searchString1 == null)
+
+            if (string.IsNullOrEmpty(searchString1) && string.IsNullOrEmpty(searchString2) && string.IsNullOrEmpty(searchString3) && string.IsNullOrEmpty(searchString4))
+            {
+                products = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
+                return View(await products.ToListAsync());
+            }
+               
+            if (searchString1 == null && searchString2 == null && searchString3 == null && searchString4 == null)
             {
                  products = db.TBL_CONCEPTO_ASOCIADO.Include(t => t.TBL_ASOCIADO).Include(t => t.TBL_CONCEPTOS);
                 return View(await products.ToListAsync());
@@ -82,44 +94,31 @@ namespace DESCUENTOS_ASOCIADOS.Controllers
             StringBuilder builder = new System.Text.StringBuilder();
 
             //Agregamos las cabezeras 
-            builder.Append("CONCEPTOS").Append(";")
-            .Append("ASOCIADOS").Append(";")
-            .Append("Eje");
+            builder.Append("PERIODICIDAD").Append(";")
+            .Append("ESTADO_CUENTA").Append(";")
+            .Append("FECHA INICIAL").Append(";")
+            .Append("FECHA FINAL").Append(";")
+            .Append("FECHA VENCIMIENTO").Append(";")
+            .Append("ID_ASOCIADO").Append(";")
+            .Append("ID_CONCEPTO").Append(";")
+            .Append("VALOR").Append(";")
+            .Append("FORMA DE PAGO");
             builder.Append("\n");
 
             foreach (var item in CONCEPTOS)
             {
 
-                //var namelider = item.lider;
-                //var codigo_col = item.codigo;
-                //var lider = (from p in email_lider.Where(n => n.nombres == namelider)
-                //             select p.email).ToList();
-
-
-
-                //if (lider.Count == 0)
-                //{
-                //    nombreLider = "No existe";
-                //}
-                //else
-                //{
-                //    nombreLider = lider[0];
-                //}
+                
 
                 builder.Append(item.PERIODICIDAD).Append(";");
                 builder.Append(item.ESTADO_CUENTA).Append(";");
-                //.Append(item.lider).Append(";")
-                //.Append(item.eje_funcional).Append(";");
-
-                //foreach (var peso in pesos.Where(n => n.Lider == nombreLider))
-                //{
-                //    builder.Append(peso.Peso_Objetivo).Append(";");
-                //}
-
-                //foreach (var calificacion in calificaciones.Where(n => n.codigo_colaborador == codigo_col))
-                //{
-                //    builder.Append(calificacion.calificacion).Append(";");
-                //}
+                builder.Append(item.FECHA_INICIAL).Append(";");
+                builder.Append(item.FECHA_FINAL).Append(";");
+                builder.Append(item.FECHA_VENC).Append(";");
+                builder.Append(item.ID_ASOCIADO).Append(";");
+                builder.Append(item.ID_CONCEPTO).Append(";");
+                builder.Append(item.VALOR).Append(";");
+                builder.Append(item.FORMA_PAGO).Append(";");
 
                 builder.Append("\n");// agregamos una nueva fila 
             }

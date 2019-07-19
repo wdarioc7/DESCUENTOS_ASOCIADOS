@@ -7,9 +7,9 @@
 
 <h2>Create</h2>
 
-<table>
-    <tr>
-        <th>seleccionar</th>
+<table class="table table-bordered table-responsive" style="width:100%">
+    <tr style="background-color:#000000;color:#ffffff">
+        @*<th>seleccionar</th>*@
         <th>
             NOMBRE ASOCIADO
         </th>
@@ -19,7 +19,7 @@
     @foreach (var item in @ViewBag.Asociados)
     {
         <tr>
-            <td>@Html.CheckBox("@item.ID_ASOCIADO", false)</td>
+            @*<td>@Html.CheckBox("@item.ID_ASOCIADO", false)</td>*@
             <td>
                 @item.NOMBRE
             </td>

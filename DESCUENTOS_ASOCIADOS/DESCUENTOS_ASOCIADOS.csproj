@@ -598,6 +598,7 @@
     <Content Include="img\customSelect-arrow.gif" />
     <Content Include="img\geekslabs.png" />
     <Content Include="img\Germany.png" />
+    <Content Include="img\icons\EXCEL.png" />
     <Content Include="img\icons\line-icon-c.png" />
     <Content Include="img\icons\line-icon-hover.png" />
     <Content Include="img\icons\line-icon.png" />
@@ -813,6 +814,7 @@
     <Content Include="Views\TBL_CONCEPTO_ASOCIADO\Edit.cshtml" />
     <Content Include="Views\TBL_CONCEPTO_ASOCIADO\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,17 +2,17 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<h2>Index</h2>
+<h2>CONCEPTOS</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo Concepto", "Create")
 </p>
 <div style="width: 800px; height: 200px; overflow-y: scroll;">
-    <table class="table">
-        <tr>
+    <table class="table table-bordered table-responsive">
+        <tr style="background-color:#000000;color:#fff">
             <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.CODIGO_CONCEPTO)

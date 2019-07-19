@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<h2>Index</h2>
+<h2>RELACION CONCEPTO ASOCIADO</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,8 +13,8 @@
 
 @using (Html.BeginForm())
 {
-    <table>
-        <tr>
+    <table class="table table-bordered table-responsive" style="width:100%">
+        <tr style="background-color:#000000;color:#0094ff">
             <td>
                 Periodicidad: @Html.TextBox("SearchString1")
 
@@ -34,19 +34,20 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Search" />
+                <input class="btn btn-danger" style="width:100%" type="submit" value="Search" />
             </td>
         </tr>
 
     </table>
 
 }
-<p>
-    @Html.ActionLink("EXPORTAR A EXCEL", "GenerarExcel")
-</p>
+    <p>
+        @Html.ActionLink("EXPORTAR A EXCEL", "GenerarExcel")
+        <img src="~/img/icons/EXCEL.png" style="width:50PX;height:40px" />
+    </p>
 
-<table class="table">
-    <tr>
+<table class="table table-bordered table-responsive" style="width:100%">
+    <tr style="background-color:#000000;color:#fff">
         <th>
             @Html.DisplayNameFor(model => model.FECHA_INICIAL)
         </th>
@@ -108,9 +109,9 @@
                 @Html.DisplayFor(modelItem => item.TBL_CONCEPTOS.CODIGO_CONCEPTO)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_CONASC }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_CONASC }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_CONASC })
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_CONASC }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_CONASC }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_CONASC })
             </td>
         </tr>
     }
